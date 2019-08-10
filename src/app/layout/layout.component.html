@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" routerLink="/">
+    <img src="/assets/logo.svg" />
+    Contabilidad
+  </a>
+  <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" [ngClass]="{ show: navbarOpen }">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          routerLink="/"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          ><fa-icon icon="tachometer-alt"></fa-icon> Inicio</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          routerLink="/movements/add"
+          routerLinkActive="active"
+          ><fa-icon icon="plus-circle"></fa-icon> Añadir movimiento</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          routerLink="/movements"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          ><fa-icon icon="exchange-alt"></fa-icon> Movimientos</a
+        >
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item d-none d-lg-inline-block">
+        <span class="navbar-text"> Bienvenido, {{ username }} </span>
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-link nav-link" (click)="onLogout()">
+          <fa-icon icon="power-off"></fa-icon> Salir
+        </button>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="scale-up-center" [@routeAnimations]="prepareRoute(outlet)">
+  <router-outlet #outlet="outlet"></router-outlet>
+</div>

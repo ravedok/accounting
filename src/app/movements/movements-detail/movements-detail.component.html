@@ -1,0 +1,120 @@
+<div class="container">
+  <h2>Añadir movimiento</h2>
+  <hr />
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <!-- DATE -->
+    <div class="form-group">
+      <label for="inputDate">Fecha</label>
+      <div class="input-group" style="width: 155px">
+        <input
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': hasError('date')
+          }"
+          placeholder="dd/mm/yyyy"
+          appAutofocus
+          name="dp"
+          ngbDatepicker
+          #d="ngbDatepicker"
+          formControlName="date"
+          autocomplete="off"
+        />
+
+        <div class="input-group-append">
+          <button
+            class="btn btn-outline-secondary"
+            (click)="d.toggle()"
+            type="button"
+            tabindex="-1"
+          >
+            <fa-icon icon="calendar-alt"></fa-icon>
+          </button>
+        </div>
+        <div class="invalid-feedback" *ngIf="hasError('date', 'required')">
+          La fecha es requerida
+        </div>
+      </div>
+    </div>
+
+    <!-- TIPO -->
+    <div class="form-group">
+      <label for="incomeInput">Tipo</label>
+      <div>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input
+            type="radio"
+            id="incomeInput"
+            class="custom-control-input"
+            formControlName="type"
+            value="income"
+          />
+          <label class="custom-control-label" for="incomeInput">Ingreso</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input
+            type="radio"
+            id="expenseInput"
+            class="custom-control-input"
+            formControlName="type"
+            value="expense"
+          />
+          <label class="custom-control-label" for="expenseInput">Gasto</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- DESCRIPTION -->
+    <div class="form-group">
+      <label for="inputDescription">Descripción</label>
+      <input
+        type="text"
+        class="form-control"
+        id="inputDescription"
+        formControlName="description"
+        [ngClass]="{
+          'is-invalid': hasError('description')
+        }"
+      />
+      <div class="invalid-feedback" *ngIf="hasError('description', 'required')">
+        La descripción es requerida
+      </div>
+    </div>
+
+    <!-- AMOUNT -->
+    <div class="form-group">
+      <label for="inputAmount">Importe</label>
+      <div class="input-group">
+        <div class="position-relative" style="width:200px;">
+          <input
+            type="number"
+            class="form-control text-right"
+            id="inputAmount"
+            formControlName="amount"
+            [ngClass]="{
+              'is-invalid': hasError('amount')
+            }"
+          />
+          <div class="invalid-feedback" *ngIf="hasError('amount', 'min')">
+            Debes indicar un importe
+          </div>
+        </div>
+        <div class="input-group-append">
+          <span class="input-group-text">€</span>
+        </div>
+      </div>
+    </div>
+    <div class="btn-group mt-2">
+      <!-- SUBMIT -->
+      <button type="submit" class="btn btn-primary" [disabled]="loading">
+        <fa-icon *ngIf="loading" icon="spinner" [pulse]="true"></fa-icon>
+        <fa-icon *ngIf="!loading" icon="save"></fa-icon>
+        Guardar
+      </button>
+      <!-- CANCEL -->
+      <button type="button" class="btn btn-secondary" (click)="cancel()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

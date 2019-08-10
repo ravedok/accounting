@@ -1,0 +1,36 @@
+.form-group {
+  position: relative;
+  .form-control {
+    padding-right: $input-padding-x;
+    background-image: none;
+  }
+  .invalid-feedback {
+    position: absolute;
+    right: 0.25rem;
+    background-color: $white;
+    padding: 0 0.25rem;
+    z-index: 2;
+    bottom: -8px;
+    display: inline-block;
+    text-align: right;
+    width: auto;
+    border-bottom-left-radius: $input-border-radius;
+    border-bottom-right-radius: $input-border-radius;
+  }
+}
+
+// Ocultamos botones de campos numéricos
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+ngb-datepicker {
+  background-color: $white;
+  z-index: 1;
+}

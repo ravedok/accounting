@@ -1,0 +1,14 @@
+@import 'variables';
+@import '~bootstrap/scss/_mixins';
+
+:host {
+  background-color: $light;
+
+  .container {
+    min-height: 100vh;
+    background: url(/assets/404.svg) no-repeat left center;
+    @include media-breakpoint-down(sm) {
+      background-position: center bottom;
+    }
+  }
+}

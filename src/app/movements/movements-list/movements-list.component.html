@@ -1,0 +1,99 @@
+<div class="container">
+  <h2 class="d-flex">
+    Movimientos
+    <button class="btn btn-primary ml-auto" (click)="add()">
+      <fa-icon icon="plus-circle"></fa-icon> Añadir
+    </button>
+  </h2>
+  <div class="table-responsive">
+  <table class="table table-striped table-borderless table-sm mt-4">
+    <thead>
+      <tr>
+        <th scope="col">Fecha</th>
+        <th scope="col">Descripción</th>
+        <th scope="col" class="text-right">Cantidad</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let movement of movements$ | async">
+        <td scope="col">
+          {{ movement.date | date: 'dd/MM/yyyy' }}
+        </td>
+        <td scope="col">{{ movement.description }}</td>
+        <td
+          scope="col"
+          class="text-right"
+          [ngClass]="{
+            'text-success': movement.type === 'income',
+            'text-danger': movement.type === 'expense'
+          }"
+        >
+          {{ movement.type === 'income' ? '+' : '-' }}
+          {{ movement.amount | currency: 'EUR' }}
+        </td>
+        <td>
+          <div class="btn-group ml-2" role="group">
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-secondary"
+              (click)="edit(movement)"
+            >
+              <fa-icon icon="pen"></fa-icon>
+            </button>
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-secondary"
+              (click)="remove(movement)"
+            >
+              <fa-icon icon="trash"></fa-icon>
+            </button>
+          </div>
+        </td>
+      </tr>
+      <!-- CARGA DEL FORMULARIO -->
+      <tr *ngIf="(movements$ | async)?.length === 0">
+        <td colSpan="4" class="text-center">
+          <button class="btn btn-primary btn-lg my-5" (click)="add()">
+            Añade tu primer movimiento
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+  <ng-template #confirmRemoveTpl let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Borrar movimiento</h4>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close button"
+        aria-describedby="modal-title"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>¿Estas seguro de querer borrar el movimiento?</p>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-outline-secondary"
+        (click)="modal.dismiss('cancel click')"
+      >
+        Cancelar
+      </button>
+      <button
+        type="button"
+        ngbAutofocus
+        class="btn btn-danger"
+        (click)="modal.close('Ok click')"
+      >
+        Borrar
+      </button>
+    </div>
+  </ng-template>
+</div>

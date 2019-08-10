@@ -1,0 +1,49 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="scale-up-center">
+  <img class="mb-4" src="/assets/logo.svg" alt="" width="72" height="72" />
+  <h1 class="h3 mb-3 font-weight-normal">Por favor identificate</h1>
+  <div class="form-group mb-3">
+    <label for="inputEmail" class="sr-only">Correo eléctronico</label>
+    <input
+      type="email"
+      id="inputEmail"
+      appAutofocus
+      class="form-control"
+      placeholder="Correo eléctronico"
+      formControlName="email"
+      [ngClass]="{ 'is-invalid': hasError('email') }"
+    />
+    <div class="invalid-feedback" *ngIf="hasError('email', 'required')">
+      El correo electrónico es requerido
+    </div>
+    <div class="invalid-feedback" *ngIf="hasError('email', 'email')">
+      El formato no es válido
+    </div>
+  </div>
+  <div class="form-group mb-3">
+    <label for="inputPassword" class="sr-only">Contraseña</label>
+    <input
+      type="password"
+      id="inputPassword"
+      class="form-control"
+      placeholder="Contraseña"
+      formControlName="password"
+      [ngClass]="{
+        'is-invalid': hasError('password')
+      }"
+    />
+    <div class="invalid-feedback" *ngIf="hasError('password', 'required')">
+      La contraseña es requerida
+    </div>
+  </div>
+
+  <button
+    class="btn btn-lg btn-primary btn-block"
+    type="submit"
+    [disabled]="loading"
+  >
+    <fa-icon *ngIf="loading" icon="spinner" [pulse]="true"></fa-icon>
+    <ng-container *ngIf="!loading">Entrar</ng-container>
+  </button>
+  <hr />
+  <p class="mt-2"><a routerLink="/register">Crear una cuenta</a></p>
+</form>

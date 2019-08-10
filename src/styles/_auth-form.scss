@@ -1,0 +1,29 @@
+.auth-form {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: $light;
+  min-height: 100vh;
+  form {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+    text-align: center;
+
+    .form-group {
+      margin: 0;
+    }
+
+    input {
+      height: auto;
+      padding: 10px;
+      font-size: 16px;
+
+      &:focus {
+        z-index: 2;
+      }
+    }
+  }
+}

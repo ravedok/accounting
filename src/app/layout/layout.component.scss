@@ -1,0 +1,26 @@
+:host {
+  display: block;
+  padding-top: 4.5rem;
+  > nav {
+    @keyframes nav-enter {
+      0% {
+        transform: translateY(-100%);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    animation: nav-enter 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  }
+
+  .navbar-brand {
+    img {
+      width: 32px;
+    }
+  }
+
+  .cursor {
+    cursor: pointer;
+  }
+}
